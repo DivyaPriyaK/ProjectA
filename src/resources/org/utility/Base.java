@@ -1,5 +1,10 @@
 package org.utility;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,7 +25,7 @@ import org.json.simple.parser.JSONParser;
 
 public class Base {
 	public static WebDriver driver;
-	WebDriverWait wait;
+	static WebDriverWait wait;
 	static File f1 = new File("./JSON/Configuration.json");
 
 	public static WebDriver getDriver() {
@@ -50,7 +55,7 @@ public class Base {
 		return driver;
 	}
 
-	public boolean elementToBeVisible(WebDriver driver, int time,
+	public static boolean elementToBeVisible(WebDriver driver, int time,
 			WebElement element) {
 		boolean flag = false;
 		try {
@@ -63,7 +68,7 @@ public class Base {
 		return flag;
 	}
 
-	public boolean alertIsPresent(WebDriver driver, int time) {
+	public static boolean alertIsPresent(WebDriver driver, int time) {
 		boolean flag = false;
 		try {
 			wait = new WebDriverWait(driver, time);
@@ -75,7 +80,7 @@ public class Base {
 		return flag;
 	}
 
-	public boolean elementToBeClickable(WebDriver driver, int time,
+	public static boolean elementToBeClickable(WebDriver driver, int time,
 			WebElement element) {
 		boolean flag = false;
 		try {
@@ -88,7 +93,8 @@ public class Base {
 		return flag;
 	}
 
-	public boolean elementFound(WebDriver driver, int time, WebElement element) {
+	public static boolean elementFound(WebDriver driver, int time,
+			WebElement element) {
 		boolean res = false;
 		driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
 		try {
@@ -102,7 +108,7 @@ public class Base {
 
 	}
 
-	public boolean elementFound(WebElement element) {
+	public static boolean elementFound(WebElement element) {
 		boolean res = false;
 		try {
 			res = element.isDisplayed();
@@ -113,7 +119,7 @@ public class Base {
 		return res;
 	}
 
-	public void setText(WebElement element, String name) {
+	public static void setText(WebElement element, String name) {
 		if (name != null && elementFound(element)) {
 			element.clear();
 			element.sendKeys(name);
@@ -121,7 +127,7 @@ public class Base {
 
 	}
 
-	public String getText(WebElement element) {
+	public static String getText(WebElement element) {
 		String name = null;
 		if (elementFound(element)) {
 			name = element.getAttribute("value");
@@ -130,7 +136,7 @@ public class Base {
 
 	}
 
-	public void clickBtn(WebElement element) {
+	public static void clickBtn(WebElement element) {
 		if (elementFound(element)) {
 			element.click();
 		}
@@ -151,7 +157,7 @@ public class Base {
 		return jsonObject;
 	}
 
-	public void getScreenShot(String screenShotFileName) {
+	public static void getScreenShot(String screenShotFileName) {
 		File screenShotLocation = new File("./screenshot/" + screenShotFileName
 				+ ".png");
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -162,5 +168,32 @@ public class Base {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void uploadFiles(File path) {
+		try {
+			Robot robot = new Robot();
+			robot.setAutoDelay(3000);
+			StringSelection selection = new StringSelection(
+					path.getAbsolutePath());
+			Toolkit.getDefaultToolkit().getSystemClipboard()
+					.setContents(selection, null);
+			// press control+v
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.setAutoDelay(3000);
+			// release control+v
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_V);
+			// press enter
+			robot.setAutoDelay(3000);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }
