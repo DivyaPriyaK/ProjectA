@@ -1,13 +1,11 @@
 package org.fb.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.utility.Base;
 
 public class LoginPage extends Base {
-	WebDriver driver;
 
 	@FindBy(id = "email")
 	private WebElement txtUserName;
@@ -37,8 +35,7 @@ public class LoginPage extends Base {
 		this.txtPassword = txtPassword;
 	}
 
-	public LoginPage(WebDriver ldriver) {
-		this.driver = ldriver;
+	public LoginPage() {
 		PageFactory.initElements(driver, this);
 
 	}

@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.utility.Base;
 
-public class LoginPageTest {
+public class LoginPageTest extends Base {
 	static WebDriver driver;
 	LoginPage loginPage;
 	HomePage homePage;
@@ -24,8 +24,8 @@ public class LoginPageTest {
 	@Test
 	public void verifyLoginDetails() {
 
-		loginPage = new LoginPage(driver);
-		homePage = new HomePage(driver);
+		loginPage = new LoginPage();
+		homePage = new HomePage();
 		Assert.assertTrue(base.elementFound(driver, 10,
 				loginPage.getImgFbLogo()));
 		base.getScreenShot("facebookPage");

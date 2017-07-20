@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Base {
-	static WebDriver driver;
+	public static WebDriver driver;
 	WebDriverWait wait;
 	static File f1 = new File("./JSON/Configuration.json");
 
