@@ -17,7 +17,7 @@ public class LoginPageTest extends Base {
 
 	@BeforeClass
 	public static void launchBrowser() {
-		driver = Base.getDriver();
+		driver = getDriver();
 
 	}
 
@@ -26,21 +26,21 @@ public class LoginPageTest extends Base {
 
 		loginPage = new LoginPage();
 		homePage = new HomePage();
-		Assert.assertTrue(base.elementFound(driver, 10,
-				loginPage.getImgFbLogo()));
-		base.getScreenShot("facebookPage");
+		Assert.assertTrue(elementFound(driver, 10, loginPage.getImgFbLogo()));
+		getScreenShot("facebookPage");
 
-		base.setText(loginPage.getTxtUserName(), "ramesh@gmail.com");
-		base.getScreenShot("username");
+		setText(loginPage.getTxtUserName(), "ramesh@gmail.com");
+		getScreenShot("username");
 		Assert.assertEquals("ramesh@gmail.com",
-				base.getText(loginPage.getTxtUserName()));
-		base.getScreenShot("password");
+				getText(loginPage.getTxtUserName()));
+		getScreenShot("password");
 		loginPage.setTxtPassword("12345");
-		base.setText(loginPage.getTxtPassword(), "12345");
-		base.getScreenShot("login");
-		Assert.assertEquals("12345", base.getText(loginPage.getTxtPassword()));
-		base.clickBtn(loginPage.getBtnLogin());
-		base.getScreenShot("after login");
+		setText(loginPage.getTxtPassword(), "12345");
+		getScreenShot("login");
+		Assert.assertEquals("12345", getText(loginPage.getTxtPassword()));
+		clickBtn(loginPage.getBtnLogin());
+		getScreenShot("after login");
+		System.out.println("Success");
 
 	}
 
