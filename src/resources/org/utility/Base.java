@@ -6,8 +6,12 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.OutputType;
@@ -20,6 +24,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -194,6 +203,49 @@ public class Base {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+
+	public static List<HashMap<String, String>> readValueFromExcelSheet() {
+		List<HashMap<String, String>> mapDatasList = new ArrayList();
+		try {
+			File excelLocaltion = new File("./Excel/Facebook.xlsx");
+
+			String sheetName = "Datas";
+
+			FileInputStream f = new FileInputStream(
+					excelLocaltion.getAbsolutePath());
+			Workbook w = new XSSFWorkbook(f);
+			Sheet sheet = w.getSheet(sheetName);
+			Row headerRow = sheet.getRow(0);
+			for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+				Row currentRow = sheet.getRow(i);
+				HashMap<String, String> mapDatas = new HashMap<String, String>();
+				for (int j = 0; j < headerRow.getPhysicalNumberOfCells(); j++) {
+					Cell currentCell = currentRow.getCell(j);
+
+					switch (currentCell.getCellType()) {
+					case Cell.CELL_TYPE_STRING:
+						mapDatas.put(headerRow.getCell(j).getStringCellValue(),
+								currentCell.getStringCellValue());
+						break;
+					case Cell.CELL_TYPE_NUMERIC:
+						mapDatas.put(headerRow.getCell(j).getStringCellValue(),
+								String.valueOf(currentCell
+										.getNumericCellValue()));
+
+						break;
+
+					}
+				}
+
+				mapDatasList.add(mapDatas);
+			}
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return mapDatasList;
 
 	}
 }

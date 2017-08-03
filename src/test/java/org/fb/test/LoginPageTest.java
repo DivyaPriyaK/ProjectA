@@ -29,15 +29,19 @@ public class LoginPageTest extends Base {
 		Assert.assertTrue(elementFound(driver, 10, loginPage.getImgFbLogo()));
 		getScreenShot("facebookPage");
 
-		setText(loginPage.getTxtUserName(), "ramesh@gmail.com");
+		setText(loginPage.getTxtUserName(), readValueFromExcelSheet().get(1)
+				.get("UserName"));
 		getScreenShot("username");
-		Assert.assertEquals("ramesh@gmail.com",
+
+		Assert.assertEquals(readValueFromExcelSheet().get(1).get("UserName"),
 				getText(loginPage.getTxtUserName()));
+
 		getScreenShot("password");
-		loginPage.setTxtPassword("12345");
-		setText(loginPage.getTxtPassword(), "12345");
+		setText(loginPage.getTxtPassword(), readValueFromExcelSheet().get(1)
+				.get("Password"));
 		getScreenShot("login");
-		Assert.assertEquals("12345", getText(loginPage.getTxtPassword()));
+		Assert.assertEquals(readValueFromExcelSheet().get(1).get("Password"),
+				getText(loginPage.getTxtPassword()));
 		clickBtn(loginPage.getBtnLogin());
 		getScreenShot("after login");
 		System.out.println("Success");
