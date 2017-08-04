@@ -8,16 +8,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.utility.Base;
+import org.utility.JUnitTestReporter;
 
-public class LoginPageTest extends Base {
+public class LoginPageTest extends JUnitTestReporter {
 	static WebDriver driver;
 	LoginPage loginPage;
 	HomePage homePage;
-	Base base = new Base();
 
 	@BeforeClass
 	public static void launchBrowser() {
-		driver = getDriver();
+
+		driver = Base.getDriver();
 
 	}
 
@@ -26,24 +27,27 @@ public class LoginPageTest extends Base {
 
 		loginPage = new LoginPage();
 		homePage = new HomePage();
-		Assert.assertTrue(elementFound(driver, 10, loginPage.getImgFbLogo()));
-		getScreenShot("facebookPage");
+		Assert.assertTrue(Base.elementFound(driver, 10,
+				loginPage.getImgFbLogo()));
+		Base.getScreenShot("facebookPage");
 
-		setText(loginPage.getTxtUserName(), readValueFromExcelSheet().get(1)
-				.get("UserName"));
-		getScreenShot("username");
+		Base.setText(loginPage.getTxtUserName(), Base.readValueFromExcelSheet()
+				.get(1).get("UserName"));
+		Base.getScreenShot("username");
 
-		Assert.assertEquals(readValueFromExcelSheet().get(1).get("UserName"),
-				getText(loginPage.getTxtUserName()));
+		Assert.assertEquals(
+				Base.readValueFromExcelSheet().get(1).get("UserName"),
+				Base.getText(loginPage.getTxtUserName()));
 
-		getScreenShot("password");
-		setText(loginPage.getTxtPassword(), readValueFromExcelSheet().get(1)
-				.get("Password"));
-		getScreenShot("login");
-		Assert.assertEquals(readValueFromExcelSheet().get(1).get("Password"),
-				getText(loginPage.getTxtPassword()));
-		clickBtn(loginPage.getBtnLogin());
-		getScreenShot("after login");
+		Base.getScreenShot("password");
+		Base.setText(loginPage.getTxtPassword(), Base.readValueFromExcelSheet()
+				.get(1).get("Password"));
+		Base.getScreenShot("login");
+		Assert.assertEquals(
+				Base.readValueFromExcelSheet().get(1).get("Password"),
+				Base.getText(loginPage.getTxtPassword()));
+		Base.clickBtn(loginPage.getBtnLogin());
+		Base.getScreenShot("after login");
 		System.out.println("Success");
 
 	}
