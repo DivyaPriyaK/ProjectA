@@ -11,14 +11,14 @@ import org.utility.Base;
 import org.utility.JUnitTestReporter;
 
 public class LoginPageTest extends JUnitTestReporter {
-	static WebDriver driver;
+	static WebDriver ldriver;
 	LoginPage loginPage;
 	HomePage homePage;
 
 	@BeforeClass
 	public static void launchBrowser() {
 
-		driver = Base.getDriver();
+		ldriver = Base.getDriver();
 
 	}
 
@@ -27,7 +27,7 @@ public class LoginPageTest extends JUnitTestReporter {
 
 		loginPage = new LoginPage();
 		homePage = new HomePage();
-		Assert.assertTrue(Base.elementFound(driver, 10,
+		Assert.assertTrue(Base.elementFound(ldriver, 10,
 				loginPage.getImgFbLogo()));
 		Base.getScreenShot("facebookPage");
 
@@ -54,7 +54,7 @@ public class LoginPageTest extends JUnitTestReporter {
 
 	@AfterClass
 	public static void closeBrowser() {
-		driver.quit();
+		ldriver.quit();
 
 	}
 
