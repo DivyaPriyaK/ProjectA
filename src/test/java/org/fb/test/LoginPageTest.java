@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.utility.Base;
 import org.utility.JUnitTestReporter;
-import org.utility.JUnitTestReporter;
 
 public class LoginPageTest extends JUnitTestReporter {
 	static WebDriver ldriver;
