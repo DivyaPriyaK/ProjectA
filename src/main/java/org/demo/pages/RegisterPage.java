@@ -18,9 +18,5 @@ public class RegisterPage extends Base {
 
 	}
 
-	private void hello() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }
