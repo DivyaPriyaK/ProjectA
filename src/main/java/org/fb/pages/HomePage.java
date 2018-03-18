@@ -6,6 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.utility.Base;
 
 public class HomePage extends Base {
+	
+	
+	
+	
 	@FindBy(xpath = "//*[text()='Home']")
 	private WebElement imgHomePageLogo;
 
