@@ -23,7 +23,7 @@ public class LoginPageTest extends JUnitTestReporter {
 
 	}
 
-	@Test
+	@Testasdasdasdasd
 	public void verifyLoginDetails() {
 
 		loginPage = new LoginPage();
