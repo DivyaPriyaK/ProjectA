@@ -1,10 +1,9 @@
-package org.fb.test;
+
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 public class HomePage {
 	WebDriver driver;
 	@FindBy(xpath = "//*[text()='Home']")
@@ -13,7 +12,7 @@ public class HomePage {
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-	}
+	}t
 
 	public WebElement getImgHomePageLogo() {
 		return imgHomePageLogo;
@@ -23,3 +22,4 @@ public class HomePage {
 		this.imgHomePageLogo = imgHomePageLogo;
 	}
 }
+//asdasdsad
